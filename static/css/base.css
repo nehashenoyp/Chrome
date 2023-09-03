@@ -1,0 +1,54 @@
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Spartan',sans-serif;
+}
+
+h1 {
+    line-height: 64px;
+    color: #222;
+    text-align: center;
+    font: bold;
+}
+
+#header{
+    padding: 10px 40px;
+    /* background: #eed5aa;*/
+    /* background: linear-gradient(to right,#eed5aa,rgba(253,244,212,255));  */
+    background-image: url(bg1.jpg);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+}
+
+#hero{
+    background-image: url(bg1.jpg);
+    height: 150vh;
+    width: 100%;
+    padding: 0 80px;
+    justify-content: center;
+    align-items: center;
+}
+
+form{
+    text-align: center;
+    padding: 30px;
+}
+#results {
+    background-color: transparent;
+    padding: 20px;
+    width: 400px; 
+    margin: 20px auto;
+    text-align: center;
+}
+
+.result-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    background-color: transparent;
+}
+
+#message{
+    color: red;
+    font-weight: bolder;
+}

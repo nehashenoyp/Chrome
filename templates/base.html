@@ -1,0 +1,64 @@
+{% load static %} 
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>FindIT</title>
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    </head>
+    <body>
+    <section id="header">
+        <a href="#"><img src="{% static 'img\logo.png' %}" class="logo" alt="" width="125px" height="100px"></a>
+    </section>
+    <section id="hero">
+        <br><br>
+        <h1>What are you looking for?</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <!-- <input type="text" id="value" placeholder="Search..."> -->
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        <section id="results">
+            <h3>Search Results</h3>
+            
+            <!-- <div class="result-box">
+                <h3>Result 1</h3>
+                <p>This is the content of the first search result.</p>
+            </div>
+        
+            <div class="result-box">
+                <h3>Result 2</h3>
+                <p>This is the content of the second search result.</p>
+            </div>
+        
+            <div class="result-box">
+                <h3>Result 3</h3>
+                <p>This is the content of the third search result.</p>
+            </div> -->
+
+            <script>   
+                const searchResultsContainer = document.getElementById('search-results');
+                for (const result of searchResults) 
+                {
+                    const resultBox = document.createElement('div');
+                    resultBox.classList.add('result-box');
+
+                    const title = document.createElement('h2');
+                    title.textContent = result.title;
+
+                    const content = document.createElement('p');
+                    content.textContent = result.content;
+
+                    resultBox.appendChild(title);
+                    resultBox.appendChild(content);
+
+                    searchResultsContainer.appendChild(resultBox);
+                }
+            </script>
+
+        </section>
+    </section>
+    </body>
+</html>

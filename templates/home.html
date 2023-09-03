@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FindIT</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+    <section id="header">
+        <a href="#"><img src="{% static 'img\logo.png' %}" class="logo" alt="" width="125px" height="100px"></a>
+    </section>
+    <section id="hero">
+        <br><br>
+        <h1>Where would you like to search?</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <!-- <input type="text" id="value" placeholder="Search..."> -->
+            <button type="submit" class="btn btn-primary">Search</button>
+            <!-- {% if messages %}
+            <ul class="messages">
+            {% for message in messages %} -->
+            <br><br>
+            <div id="message">
+                <ul{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</ul>
+            </div>
+            <!-- {% endfor %}
+            </ul>
+            {% endif %} -->
+
+        </form>
+    </section>
+</body>
