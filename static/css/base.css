@@ -12,6 +12,15 @@ h1 {
     font: bold;
 }
 
+p {
+    color: #222;
+    text-align: center;
+    align-items: center;
+    font-size: medium;
+    /* justify-content: center; */
+}
+
+
 #header{
     padding: 10px 40px;
     /* background: #eed5aa;*/

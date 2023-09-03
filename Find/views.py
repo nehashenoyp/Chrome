@@ -3,7 +3,75 @@ from django.contrib import messages
 from .forms import SearchForm , PathForm
 import os
 
+import chromadb
+import os
+
+# Explorer function
+final = []
+metadatas = []
+chroma_client = chromadb.Client()
+
+collection = chroma_client.create_collection(name="System-db")
+
+def listdirs(rootdir):
+    for it in os.scandir(rootdir):
+        if it.is_dir():
+            if not os.listdir(it):
+                # Empty
+                if '/' in it.path:
+                    final.append('folder ' + it.path.replace('/', ' '))
+                else:
+                    final.append('folder ' + it.path.replace("\\", ' '))
+                    
+                metadatas.append({"source": 'folder - ' + it.path})
+                continue
+
+            # Non empty dir
+            listdirs(it)
+        else:
+            # Is a file
+            final.append('file ' + it.path.replace("\\", ' '))
+            metadatas.append({"source": '--file - ' + it.path})
+
+
+def init(path):
+    global final, metadatas
+
+    # Adding all file paths to list
+    final = []
+    metadatas = []
+    listdirs(path)
+
+    # Adding all to the database
+    ids = []
+    for i in range(len(final)):
+        ids.append("id" + str(i+1))
+        
+    collection.add(
+        documents=final,
+            metadatas=metadatas,
+            ids=ids
+        )
+
+def search(query):
+    results = collection.query(
+        query_texts=[query],
+        n_results=3
+    )
+
+    ans = []
+    print(results)
+
+    for item in results['metadatas'][0]:
+        
+        # if item['source'][0] == '-':
+        ans.append(item['source'][9:])
+    
+    return ans
+
 def base(request):
+
+    result = []
 
     if request.method == 'POST':
         form = SearchForm(request.POST)
@@ -12,10 +80,13 @@ def base(request):
             query = form.cleaned_data['query']
             # Add your processing logic here
             print('ans - ',query)
+
+            result = search(query)
+            print(result)
+
     else:
-        print("hi")   
         form = SearchForm()
-    return render(request,'base.html', {'form': form})
+    return render(request,'base.html', {'form': form, 'searchResults': result})
 
 def path(request):
 
@@ -30,11 +101,14 @@ def path(request):
 
                 if os.path.isdir(dir):
 
+                    # messages.success(request, 'Please wait while the databse is created') 
+                    init(dir)
+
                     return redirect('base/')
                 else:
-                    messages.error(request, 'Path not a directory.')                
+                    messages.error(request, 'Path not a directory that exists.')                
             else:
-                messages.error(request, 'Path does not exist.')
+                messages.error(request, 'Path not a directory that exists.')
                 return render(request,'home.html', {'form': form})
             
     else:
