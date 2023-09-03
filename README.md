@@ -10,7 +10,7 @@
 ## Link to product walkthrough
 [link to video](https://drive.google.com/drive/folders/1hfrmGamdEs4GvI_ldsJorgnRa2FfezU_?usp=sharing)
 ## How it Works ?
-1. Paste the path to the directory in which you would like to search in the search box and click on search. You might have to wait for some time to allow loading all the paths to the database in case the path is valid else an error message will be displayed.(Make sure you don't enclose the path in quotes).
+1. Paste the path to the directory in which you would like to search in the search box and click on search. You might have to wait for some time to allow loading all the paths to the database in case the path is valid else an error message will be displayed.(Make sure you don't enclose the path in quotes and avoid directories containing compressed files).
 
    eg: F:\Study Material\S6\PP
 2. Once the valid path is entered and processed you will see the search box where you can type in what you would like to search.
