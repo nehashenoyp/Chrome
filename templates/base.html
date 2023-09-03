@@ -38,10 +38,25 @@
                 <p>This is the content of the third search result.</p>
             </div> -->
 
-            <script>   
+            {% for i in searchResults %}
+                <br>
+                <br>
+                <div class="row">
+                    {{ i }}
+                    <br>
+                    <br>
+                </div>
+            {% endfor %}
+            <!-- <div id="search-results"></div>
+            <script>
+
+                const dataFromBackend = JSON.parse('{{ searchResults|safe }}');
+
                 const searchResultsContainer = document.getElementById('search-results');
-                for (const result of searchResults) 
+                for (const result of dataFromBackend) 
                 {
+                    // <p> Hi</p>
+                    console.log(result)
                     const resultBox = document.createElement('div');
                     resultBox.classList.add('result-box');
 
@@ -56,7 +71,7 @@
 
                     searchResultsContainer.appendChild(resultBox);
                 }
-            </script>
+            </script> -->
 
         </section>
     </section>
